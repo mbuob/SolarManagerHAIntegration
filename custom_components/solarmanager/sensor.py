@@ -10,7 +10,7 @@ from homeassistant.components.sensor import (
     SensorStateClass,
 )
 from homeassistant.config_entries import ConfigEntry
-from homeassistant.const import UnitOfEnergy, UnitOfPower, PERCENTAGE
+from homeassistant.const import UnitOfEnergy, UnitOfPower, UnitOfTemperature, PERCENTAGE
 from homeassistant.core import HomeAssistant
 from homeassistant.helpers.device_registry import DeviceInfo
 from homeassistant.helpers.entity_platform import AddEntitiesCallback
@@ -165,6 +165,10 @@ async def async_setup_entry(
         if device["type"] in ("battery", "car"):
             entities.append(
                 SolarManagerDeviceSocSensor(coordinator, device_id, device_info)
+            )
+        if device["type"] == "heatpump":
+            entities.append(
+                SolarManagerDeviceTemperatureSensor(coordinator, device_id, device_info)
             )
 
     async_add_entities(entities)
@@ -337,4 +341,34 @@ class SolarManagerDeviceSocSensor(CoordinatorEntity[SolarManagerCoordinator], Se
         for device in self.coordinator.data.get("devices") or []:
             if device.get("_id") == self._device_id:
                 return device.get("soc")
+        return None
+
+
+class SolarManagerDeviceTemperatureSensor(
+    CoordinatorEntity[SolarManagerCoordinator], SensorEntity
+):
+    _attr_has_entity_name = True
+    _attr_name = "Temperature"
+    _attr_device_class = SensorDeviceClass.TEMPERATURE
+    _attr_state_class = SensorStateClass.MEASUREMENT
+    _attr_native_unit_of_measurement = UnitOfTemperature.CELSIUS
+
+    def __init__(
+        self,
+        coordinator: SolarManagerCoordinator,
+        device_id: str,
+        device_info: DeviceInfo,
+    ) -> None:
+        super().__init__(coordinator)
+        self._device_id = device_id
+        self._attr_unique_id = f"{device_id}_temperature"
+        self._attr_device_info = device_info
+
+    @property
+    def native_value(self) -> float | None:
+        if self.coordinator.data is None:
+            return None
+        for device in self.coordinator.data.get("devices") or []:
+            if device.get("_id") == self._device_id:
+                return device.get("temperature")
         return None

@@ -20,7 +20,7 @@ class SolarManagerCoordinator(DataUpdateCoordinator[dict]):
         host: str,
         api_key: str | None,
     ) -> None:
-        self._base_url = f"http://{host}"
+        self._base_url = f"https://{host}"
         self._headers = {"X-API-Key": api_key} if api_key else {}
         super().__init__(
             hass,
@@ -30,7 +30,7 @@ class SolarManagerCoordinator(DataUpdateCoordinator[dict]):
         )
 
     async def _async_update_data(self) -> dict:
-        session = async_get_clientsession(self.hass)
+        session = async_get_clientsession(self.hass, verify_ssl=False)
         try:
             async with session.get(
                 f"{self._base_url}/v2/point",
@@ -43,7 +43,7 @@ class SolarManagerCoordinator(DataUpdateCoordinator[dict]):
             raise UpdateFailed(f"Error fetching SolarManager data: {err}") from err
 
     async def async_fetch_devices(self) -> list[dict]:
-        session = async_get_clientsession(self.hass)
+        session = async_get_clientsession(self.hass, verify_ssl=False)
         async with session.get(
             f"{self._base_url}/v2/devices",
             headers=self._headers,

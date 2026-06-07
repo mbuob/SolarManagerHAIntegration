@@ -28,10 +28,10 @@ class SolarManagerConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
             api_key = user_input.get(CONF_API_KEY, "").strip() or None
 
             try:
-                session = async_get_clientsession(self.hass)
+                session = async_get_clientsession(self.hass, verify_ssl=False)
                 headers = {"X-API-Key": api_key} if api_key else {}
                 async with session.get(
-                    f"http://{host}/v2/point",
+                    f"https://{host}/v2/point",
                     headers=headers,
                     timeout=aiohttp.ClientTimeout(total=8),
                 ) as response:
