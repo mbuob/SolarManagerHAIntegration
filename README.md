@@ -78,6 +78,12 @@ See [CONTEXT.md](./CONTEXT.md) for the domain glossary and [docs/adr/](./docs/ad
 
 ## Release notes
 
+### v1.0.1
+- Fixed connection to use HTTPS with SSL verification disabled (SolarManager uses a self-signed certificate)
+- Added temperature sensor for heat pump devices
+- Added custom integration icon
+- Added HACS support
+
 ### v1.0.0
 - Initial release
 - Polls SolarManager Local API (`/v2/point`) every 10 seconds
