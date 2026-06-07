@@ -1,0 +1,20 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "Connect to SolarManager",
+        "description": "Enter the connection details for your SolarManager device.",
+        "data": {
+          "host": "Host (IP address or hostname)",
+          "api_key": "API Key (optional)"
+        }
+      }
+    },
+    "error": {
+      "cannot_connect": "Failed to connect to SolarManager. Check the host address and API key."
+    },
+    "abort": {
+      "already_configured": "This SolarManager is already configured."
+    }
+  }
+}

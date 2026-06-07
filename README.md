@@ -34,7 +34,6 @@ This integration resolves the conflict by letting SolarManager retain the sole M
 |---|---|---|
 | `host` | Yes | IP address or hostname of the SolarManager device |
 | `api_key` | No | API key for the `X-API-Key` header (if configured on the device) |
-| `verify_ssl` | No | Verify SSL certificate (default: `false` — SolarManager uses a self-signed cert) |
 
 ## Entities
 

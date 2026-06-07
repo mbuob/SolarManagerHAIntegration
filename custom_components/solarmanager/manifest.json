@@ -1,0 +1,10 @@
+{
+  "domain": "solarmanager",
+  "name": "SolarManager",
+  "version": "1.0.0",
+  "config_flow": true,
+  "dependencies": [],
+  "codeowners": [],
+  "requirements": [],
+  "iot_class": "local_polling"
+}
