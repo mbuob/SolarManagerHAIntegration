@@ -24,9 +24,19 @@ This integration resolves the conflict by letting SolarManager retain the sole M
 
 ## Installation
 
-1. Copy the `custom_components/solarmanager` directory into your HA `custom_components/` folder.
-2. Restart Home Assistant.
-3. Go to **Settings → Devices & Services → Add Integration** and search for **SolarManager**.
+### Via HACS (recommended)
+
+1. In HACS, open the **⋮** menu → **Custom repositories**
+2. Add `https://github.com/mbuob/SolarManagerHAIntegration` with category **Integration**
+3. HACS → Integrations → search **SolarManager** → **Download**
+4. Restart Home Assistant
+5. Go to **Settings → Devices & Services → Add Integration** and search for **SolarManager**
+
+### Manual
+
+1. Copy the `custom_components/solarmanager` directory into your HA `custom_components/` folder
+2. Restart Home Assistant
+3. Go to **Settings → Devices & Services → Add Integration** and search for **SolarManager**
 
 ## Configuration
 
@@ -59,7 +69,8 @@ This integration resolves the conflict by letting SolarManager retain the sole M
 |---|---|
 | Power | Current device power in W |
 | Signal | Connection state (connected / not connected) |
-| State of charge | Battery or EV charge level in % (where applicable) |
+| State of charge | Battery or EV charge level in % (battery and EV only) |
+| Temperature | Current temperature in °C (heat pump only) |
 
 ## Architecture
 
