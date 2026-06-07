@@ -75,3 +75,13 @@ This integration resolves the conflict by letting SolarManager retain the sole M
 ## Architecture
 
 See [CONTEXT.md](./CONTEXT.md) for the domain glossary and [docs/adr/](./docs/adr/) for architectural decisions.
+
+## Release notes
+
+### v1.0.0
+- Initial release
+- Polls SolarManager Local API (`/v2/point`) every 10 seconds
+- Hub device with instantaneous power sensors and accumulated energy sensors (Energy Dashboard compatible)
+- Per-device sensors for inverter (power), smart meter (power), and heat pump (power, temperature)
+- Derived grid import and export power sensors
+- Entities go unavailable when SolarManager is unreachable
